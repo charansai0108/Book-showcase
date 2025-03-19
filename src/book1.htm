@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+    <title>Book: The History of India</title>
+    <style type="text/css">
+        * {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        
+        body {
+            background-color: #F8F1E9;
+            color: #1A2A44;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .book-container {
+            background-color: #3C1A1F;
+            padding: 0.9375rem; /* 15px */
+            margin: 0.9375rem auto; /* 15px */
+            max-width: 43.75rem; /* 700px */
+            border-radius: 0.5rem; /* 8px */
+            width: 90%;
+            position: relative; /* For absolute positioning of back-link */
+        }
+
+        .book-image {
+            width: 12.5rem; /* 200px */
+            height: 15.625rem; /* 250px */
+            border-radius: 0.5rem; /* 8px */
+            display: block;
+            margin: 0 auto;
+            border: 0.375rem solid #E0B732; /* 6px */
+            padding: 0.5rem; /* 8px */
+            background-color: #F2E9D8;
+            box-sizing: border-box;
+        }
+
+        .book-title {
+            color: #F2E9D8;
+            margin-bottom: 0.9375rem; /* 15px */
+            text-align: center;
+            border-radius: 0.5rem; /* 8px */
+            font-size: 1.75rem;
+        }
+
+        .content-section {
+            margin-top: 0.9375rem; /* 15px */
+            border-radius: 0.5rem; /* 8px */
+        }
+
+        details {
+            margin-bottom: 1.25rem; /* 20px */
+            border-radius: 0.5rem; /* 8px */
+        }
+
+        summary {
+            background-color: #E0B732;
+            color: #1A2A44;
+            padding: 0.5rem; /* 8px */
+            cursor: pointer;
+            border-radius: 0.5rem; /* 8px */
+            outline: none;
+            font-size: 1rem;
+        }
+
+        .content-body {
+            background-color: #F2E9D8;
+            text-align: left;
+            padding: 0.625rem; /* 10px */
+            color: #1C2526;
+            border-radius: 0.5rem; /* 8px */
+            transition: opacity 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        details[open] summary:focus ~ details[open] .content-body {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        details[open] .content-body {
+            opacity: 1;
+        }
+
+        .feedback-form {
+            margin-top: 1.25rem; /* 20px */
+            padding: 0.9375rem; /* 15px */
+            background-color: #F2E9D8;
+            width: 18.75rem; /* 300px */
+            margin-left: auto;
+            margin-right: auto;
+            border-radius: 0.5rem; /* 8px */
+        }
+
+        .feedback-form .form-control {
+            font-size: 0.9rem;
+            padding: 0.25rem 0.5rem; /* 4px 8px */
+            height: auto;
+            border-radius: 0.5rem; /* 8px */
+        }
+
+        .feedback-form .form-label {
+            font-size: 0.9rem;
+            margin-bottom: 0.125rem; /* 2px */
+            color: #1A2A44;
+        }
+
+        .feedback-form textarea.form-control {
+            min-height: 3.75rem; /* 60px */
+            border-radius: 0.5rem; /* 8px */
+        }
+
+        .feedback-form .btn {
+            font-size: 0.9rem;
+            padding: 0.25rem 0.625rem; /* 4px 10px */
+            background-color: #3C1A1F;
+            border-color: #3C1A1F;
+            color: #F2E9D8;
+            border-radius: 0.5rem; /* 8px */
+        }
+
+        .feedback-form .btn:hover {
+            background-color: #2A1317;
+            border-color: #2A1317;
+        }
+
+        .feedback-form .mb-3 {
+            margin-bottom: 0.625rem !important; /* 10px */
+            border-radius: 0.5rem; /* 8px */
+        }
+
+        .back-link {
+            color: #F2E9D8;
+            text-decoration: none;
+            font-size: 0.9rem;
+            margin-bottom: 0.625rem; /* 10px */
+            display: block;
+            text-align: center;
+        }
+
+        .back-link:hover {
+            color: #E0B732;
+        }
+
+        /* Media Queries for Responsiveness */
+        @media (max-width: 768px) {
+            .book-container {
+                padding: 0.75rem; /* 12px */
+                margin: 0.75rem auto; /* 12px */
+            }
+
+            .book-image {
+                width: 11rem; /* 176px */
+                height: 13.75rem; /* 220px */
+            }
+
+            .book-title {
+                font-size: 1.5rem;
+            }
+
+            .feedback-form {
+                width: 80%;
+            }
+
+            summary {
+                font-size: 0.9rem;
+            }
+
+            .content-body {
+                font-size: 0.85rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .book-container {
+                margin: 0.625rem; /* 10px */
+                padding: 0.625rem; /* 10px */
+                width: 95%;
+            }
+            
+            .book-image {
+                width: 10rem; /* 160px */
+                height: 12.5rem; /* 200px */
+                border: 0.375rem solid #E0B732; /* 6px */
+                padding: 0.375rem; /* 6px */
+            }
+            
+            .book-title {
+                font-size: 1.25rem;
+            }
+
+            .feedback-form {
+                width: 100%;
+                padding: 0.75rem; /* 12px */
+            }
+
+            .content-section {
+                margin-top: 0.75rem; /* 12px */
+            }
+
+            details {
+                margin-bottom: 1rem; /* 16px */
+            }
+
+            summary {
+                font-size: 0.85rem;
+            }
+
+            .content-body {
+                font-size: 0.8rem;
+                padding: 0.5rem; /* 8px */
+            }
+
+            /* Convert "BACK TO HOME" to arrow icon in top-left */
+            .back-link {
+                position: absolute;
+                top: 0.625rem; /* 10px from top */
+                left: 0.625rem; /* 10px from left */
+                font-size: 0; /* Hide text */
+                width: 1.5rem; /* Icon size */
+                height: 1.5rem; /* Icon size */
+                margin-bottom: 0; /* Remove bottom margin */
+                text-align: left; /* Align icon left */
+            }
+
+            .back-link::before {
+                content: "\f12c"; /* Unicode for bi-arrow-left-short */
+                font-family: "bootstrap-icons";
+                font-size: 1.5rem; /* Icon size */
+                color: #F2E9D8;
+                position: absolute;
+                top: 0;
+                left: 0;
+            }
+
+            .back-link:hover::before {
+                color: #E0B732;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .book-image {
+                width: 9rem; /* 144px */
+                height: 11.25rem; /* 180px */
+            }
+
+            .book-title {
+                font-size: 1.125rem;
+            }
+
+            .feedback-form {
+                padding: 0.625rem; /* 10px */
+            }
+
+            summary {
+                font-size: 0.8rem;
+            }
+
+            .content-body {
+                font-size: 0.75rem;
+            }
+
+            .back-link {
+                top: 0.5rem; /* 8px */
+                left: 0.5rem; /* 8px */
+                width: 1.25rem; /* Smaller icon */
+                height: 1.25rem;
+            }
+
+            .back-link::before {
+                font-size: 1.25rem; /* Smaller icon */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid book-container">
+        <a href="../index.htm" class="back-link fw-medium">BACK TO HOME</a>
+        <h3 class="book-title fw-semibold">BOOK: THE HISTORY OF INDIA</h3>
+        <img src="../public/images/history1.jpg" alt="The History of India Book Cover" class="book-image">
+        
+        <div class="content-section">
+            <details>
+                <summary>Genre</summary>
+                <div class="content-body">
+                    Historical Non-fiction: This book belongs to the realm of historical literature, offering an in-depth exploration of India’s past. It traces the nation’s journey from the ancient Indus Valley Civilization to the vibrant democracy of today, detailing the rise of kingdoms, colonial rule, and the struggle for independence. Spanning millennia, it provides a comprehensive narrative of India’s cultural, political, and social evolution, shedding light on the events and forces that have shaped one of the world’s oldest civilizations.
+                </div>
+            </details>
+
+            <details>
+                <summary>Index Page</summary>
+                <div class="content-body">
+                    <ul>
+                        <li>Chapter 1: Ancient India - Page 1</li>
+                        <li>1.1 Indus Valley Civilization - Page 3</li>
+                        <li>1.2 Vedic Period and Early Kingdoms - Page 12</li>
+                        <li>Chapter 2: Medieval India - Page 35</li>
+                        <li>2.1 The Gupta Empire - Page 37</li>
+                        <li>2.2 Delhi Sultanate and Mughal Rule - Page 50</li>
+                        <li>2.3 Regional Dynasties - Page 65</li>
+                        <li>Chapter 3: Modern India - Page 80</li>
+                        <li>3.1 British Colonial Era - Page 82</li>
+                        <li>3.2 Independence Movement - Page 95</li>
+                        <li>3.3 Post-Independence India - Page 110</li>
+                    </ul>
+                </div>
+            </details>
+
+            <details>
+                <summary>Authors Overview</summary>
+                <div class="content-body">
+                    Authored by Dr. Priya Sharma, a distinguished historian with over 15 years of research into South Asian history, and co-authored by Professor Vikram Patel, an expert in Indian archaeology. Dr. Sharma, with a PhD from Jawaharlal Nehru University, has extensively studied India’s colonial and post-independence periods, publishing widely on its socio-political transformations. Professor Patel has led excavations across India, including sites like Lothal and Hampi, contributing significant insights into ancient Indian civilizations. Together, they blend scholarly depth with archaeological evidence to narrate India’s rich history.
+                </div>
+            </details>
+
+            <details>
+                <summary>Book Relevance</summary>
+                <div class="content-body">
+                    This book offers vital perspectives on India’s historical events that continue to influence its modern identity, making it essential for students, educators, and enthusiasts of Indian culture. It explores how ancient trade routes shaped economic policies, how Mughal governance informs today’s administration, and how the independence struggle forged national unity. With detailed accounts and contemporary parallels, it connects India’s past to its present, providing readers with a lens to understand the country’s role in global history and its ongoing societal developments.
+                </div>
+            </details>
+
+            <details>
+                <summary>Purchase Links</summary>
+                <div class="content-body">
+                    <ul class="list-unstyled">
+                        <li><a href="https://www.amazon.in" target="_blank">Amazon India</a> - Available in hardcover, paperback, and Kindle with fast delivery across India.</li>
+                        <li><a href="https://www.flipkart.com" target="_blank">Flipkart</a> - Offers competitive prices and cash-on-delivery options.</li>
+                        <li><a href="https://www.bookdepository.com" target="_blank">Book Depository</a> - Free worldwide shipping and multiple formats.</li>
+                        <li><a href="https://www.crossword.in" target="_blank">Crossword</a> - Available at stores and online with member discounts.</li>
+                        <li><a href="https://www.sapnaonline.com" target="_blank">SapnaOnline</a> - Regional bookstore with quick shipping in India.</li>
+                    </ul>
+                </div>
+            </details>
+        </div>
+
+        <div class="feedback-form">
+            <h4>Feedback</h4>
+            <form>
+                <div class="mb-3">
+                    <label for="name" class="form-label">Name</label>
+                    <input type="text" class="form-control" id="name" placeholder="Enter your name">
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="email" placeholder="Enter your email">
+                </div>
+                <div class="mb-3">
+                    <label for="feedback" class="form-label">Your Feedback</label>
+                    <textarea class="form-control" id="feedback" rows="3" placeholder="Write your feedback here"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+    
+    <script src="../node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

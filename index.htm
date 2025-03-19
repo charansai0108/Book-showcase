@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
+    <title>Book Showcase with 3D Animation</title>
+    <style type="text/css">
+        * {
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background-color: #F8F1E9;
+            color: #1A2A44;
+        }
+
+        header {
+            background-color: #3C1A1F;
+            color: #F2E9D8;
+            padding: 0.5rem;
+        }
+
+        aside {
+            background-color: #E0B732;
+            color: #F8F1E9;
+            padding: 0.5rem;
+        }
+
+        aside a {
+            color: #2A1317;
+            text-decoration: none;
+            font-size: 1rem;
+        }
+
+        aside a:hover {
+            color: #F2E9D8;
+        }
+
+        main {
+            flex: 1 0 auto;
+            background-color: #3C1A1F;
+            padding: 1.25rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        main h2 {
+            position: absolute;
+            top: 1vw;
+            left: 1vw;
+            color: #F2E9D8;
+            font-size: 2rem;
+        }
+
+        footer {
+            background-color: #E0B732;
+            color: #2A1317;
+            flex-shrink: 0;
+            padding: 0.5rem;
+            font-size: 1rem;
+        }
+
+        .book {
+            perspective: 62.5rem;
+            width: 12.5rem;
+            height: 15.625rem;
+            position: relative;
+            transform-style: preserve-3d;
+            transform: rotateY(0deg);
+            margin: 1rem auto;
+        }
+
+        .front-cover,
+        .inner-page,
+        .back-cover {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        .front-cover {
+            z-index: 2;
+            transform-origin: left center;
+            transform: rotateY(0deg);
+            transition: transform 2s ease; /* Slower animation */
+            border-top-right-radius: 1rem;
+            border-bottom-left-radius: 1rem;
+            overflow: hidden;
+            background: #F2E9D8;
+        }
+
+        .front-cover .front-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-top-right-radius: 1rem;
+            border-bottom-left-radius: 1rem;
+            aspect-ratio: 4 / 5;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 3;
+        }
+
+        .book:hover .front-cover {
+            transform: rotateY(-120deg);
+            cursor: pointer;
+        }
+
+        .inner-page {
+            background: #F2E9D8;
+            z-index: 1;
+            transform: translateZ(-0.625rem);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: #1C2526;
+            font-size: 0.9rem;
+            padding: 0.9375rem;
+        }
+
+        .inner-page p {
+            margin: 0 0 0.5rem 0;
+            line-height: 1.3;
+        }
+
+        .inner-page a {
+            color: #3C1A1F;
+            text-decoration: none;
+            font-size: 1rem;
+        }
+
+        .inner-page a:hover {
+            color: #2A1317;
+        }
+
+        .back-cover {
+            background: #708090;
+            transform: translateZ(-1rem);
+            z-index: 0;
+        }
+
+        .book:hover {
+            box-shadow: 0 0 1rem #DAA520;
+        }
+
+        /* Enhanced Media Queries */
+        @media screen and (max-width: 992px) {
+            .book {
+                width: 11rem;
+                height: 14rem;
+            }
+            
+            main h2 {
+                font-size: 1.5rem;
+            }
+            
+            .container {
+                margin-top: 1rem;
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            header h2 {
+                font-size: 1.2rem;
+            }
+
+            .book {
+                width: 10rem;
+                height: 12.5rem;
+            }
+
+            .inner-page {
+                padding: 0.625rem;
+                font-size: 0.8rem;
+            }
+
+            main {
+                padding: 0.625rem;
+            }
+
+            .row {
+                row-gap: 1rem;
+            }
+
+            aside a {
+                font-size: 0.875rem;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            main {
+                flex-direction: column;
+                align-items: flex-start;
+                justify-content: flex-start;
+            }
+
+            main h2 {
+                position: static;
+                margin: 0.5rem 0 1rem 0.5rem;
+                text-align: left;
+                width: 100%;
+                font-size: 1.25rem;
+            }
+
+            .book {
+                width: 9rem;
+                height: 11rem;
+            }
+
+            .front-cover {
+                transition: transform 2s ease;
+            }
+
+            .inner-page {
+                font-size: 0.75rem;
+                padding: 0.5rem;
+            }
+
+            .inner-page a {
+                font-size: 0.875rem;
+            }
+
+            .col-md-4 {
+                flex: 0 0 100%;
+                max-width: 100%;
+            }
+
+            .container {
+                width: 100%;
+                margin-top: 0;
+            }
+
+            aside {
+                justify-content: center !important;
+            }
+
+            footer {
+                font-size: 0.875rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h2 class="d-flex justify-content-center fw-semibold p-2">WELCOME TO BOOK SHOWCASE</h2>
+        <aside class="d-flex justify-content-end p-1">
+            <a href="sample1.htm" class="fw-semibold me-3">HOME</a>
+        </aside>
+    </header>
+
+    <main>
+        <h2 class="fw-semibold">EXPLORE BOOKS</h2>
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-4 d-flex justify-content-center">
+                    <div class="book">
+                        <div class="front-cover">
+                            <img src="public/images/history1.jpg" alt="The History of India Front Cover" class="front-image">
+                        </div>
+                        <div class="inner-page">
+                            <p>Explore India’s journey from the ancient Indus Valley to today’s vibrant democracy, tracing its cultural and political evolution.</p>
+                            <a href="src/book1.htm" class="fw-medium">Click for more details</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 d-flex justify-content-center">
+                    <div class="book">
+                        <div class="front-cover">
+                            <img src="public/images/romeo.jpg" alt="Romeo and Juliet Front Cover" class="front-image">
+                        </div>
+                        <div class="inner-page">
+                            <p>Experience Shakespeare’s timeless tragedy of Romeo and Juliet, a tale of star-crossed lovers defying fate and family feuds.</p>
+                            <a href="src/book2.htm" class="fw-medium">Click for more details</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 d-flex justify-content-center">
+                    <div class="book">
+                        <div class="front-cover">
+                            <img src="public/images/art2.jpg" alt="The Art of Being Alone Front Cover" class="front-image">
+                        </div>
+                        <div class="inner-page">
+                            <p>Discover how embracing solitude can foster self-discovery and inner peace in a hyper-connected world.</p>
+                            <a href="src/book3.htm" class="fw-medium">Click for more details</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p class="d-flex justify-content-center fs-6 p-1 mt-1 pb-0 fw-semibold"> © 2025 Book Showcase | All rights reserved</p>
+    </footer>
+
+    <script src="../node_modules/jquery/dist/jquery.js"></script>
+    <script src="../node_modules/bootstrap/dist/js/bootstrap.js"></script>
+</body>
+</html>
